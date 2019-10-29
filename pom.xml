@@ -1,7 +1,7 @@
-<!-- ~ Copyright 2015, 2018 Uppsala University Library ~ ~ This file is part of
-	Cora. ~ ~ Cora is free software: you can redistribute it and/or modify ~
-	it under the terms of the GNU General Public License as published by ~ the
-	Free Software Foundation, either version 3 of the License, or ~ (at your
+<!-- ~ Copyright 2015, 2018 Uppsala University Library ~ ~ This file is part 
+	of Cora. ~ ~ Cora is free software: you can redistribute it and/or modify 
+	~ it under the terms of the GNU General Public License as published by ~ 
+	the Free Software Foundation, either version 3 of the License, or ~ (at your 
 	option) any later version. ~ ~ Cora is distributed in the hope that it will 
 	be useful, ~ but WITHOUT ANY WARRANTY; without even the implied warranty 
 	of ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the ~ GNU General 
@@ -9,61 +9,60 @@
 	GNU General Public License ~ along with Cora. If not, see <http://www.gnu.org/licenses/>. -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>se.uu.ub.cora</groupId>
-        <artifactId>cora-parent</artifactId>
+	<parent>
+		<groupId>se.uu.ub.cora</groupId>
+		<artifactId>cora-parent</artifactId>
 		<version>1.0.2</version>
-    </parent>
+	</parent>
 
-    <artifactId>cora-docker-postgresql</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>Cora PostgreSQL Docker</name>
+	<artifactId>cora-docker-postgresql</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Cora PostgreSQL Docker</name>
 
-    <scm>
-        <connection>scm:git:https://github.com/lsu-ub-uu/cora-docker-postgresql.git</connection>
-        <developerConnection>scm:git:https://github.com/lsu-ub-uu/cora-docker-postgresql.git</developerConnection>
-        <url>https://github.com/lsu-ub-uu/cora-docker-postgresql</url>
-    </scm>
+	<properties>
+		<docker.repository>${cora-docker-postgresql}</docker.repository>
+		<docker.tag>12.0</docker.tag>
+	</properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+	<scm>
+		<connection>scm:git:https://github.com/lsu-ub-uu/cora-docker-postgresql.git</connection>
+		<developerConnection>scm:git:https://github.com/lsu-ub-uu/cora-docker-postgresql.git</developerConnection>
+		<url>https://github.com/lsu-ub-uu/cora-docker-postgresql</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>3.1.1</version>
 				<executions>
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <overWriteReleases>false</overWriteReleases>
-                            <includeScope>runtime</includeScope>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <configuration>
-                    <repository>${docker.repository}</repository>
-                    <tag>${docker.tag}</tag>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    
-    <properties>
-    	<docker.repository>${cora-docker-postgresql}</docker.repository>
-    	<docker.tag>12.0</docker.tag>
-    </properties>
-
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<overWriteReleases>false</overWriteReleases>
+							<includeScope>runtime</includeScope>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<configuration>
+					<repository>${docker.repository}</repository>
+					<tag>${docker.tag}</tag>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
