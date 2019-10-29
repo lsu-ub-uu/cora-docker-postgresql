@@ -25,8 +25,8 @@
 	<name>Cora PostgreSQL Docker</name>
 
 	<properties>
-		<docker.repository>${cora-docker-postgresql}</docker.repository>
-		<docker.tag>12.0</docker.tag>
+		<docker.repository>${cora-docker-postgresql}-12.0</docker.repository>
+		<docker.tag>${project.version}</docker.tag>
 	</properties>
 
 	<scm>
