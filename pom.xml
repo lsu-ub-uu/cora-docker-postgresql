@@ -59,8 +59,9 @@
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<configuration>
-					<repository>${docker.repository}-9.6</repository>
+					<repository>${docker.repository}</repository>
 <!-- 					<tag>${docker.tag}</tag> -->
+					<tag>9.6</tag>
 				</configuration>
 			</plugin>
 		</plugins>
