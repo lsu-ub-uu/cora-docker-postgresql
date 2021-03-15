@@ -60,7 +60,6 @@
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<configuration>
 					<repository>${docker.repository}</repository>
-<!-- 					<tag>${docker.tag}</tag> -->
 					<tag>9.6</tag>
 				</configuration>
 			</plugin>
