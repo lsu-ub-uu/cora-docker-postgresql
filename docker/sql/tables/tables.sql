@@ -12,7 +12,7 @@ create table link (
 	totype character varying(255),
 	toid character varying(255),
 	PRIMARY KEY (fromtype, fromid, totype, toid),
-	CONSTRAINT fk_torecord FOREIGN KEY(totype, toid) REFERENCES record(type, id) 
+	CONSTRAINT fk_torecord FOREIGN KEY(totype, toid) REFERENCES record(type, id), 
 	CONSTRAINT fk_fromrecord FOREIGN KEY(fromtype, fromid) REFERENCES record(type, id) 
 );
 
@@ -28,4 +28,6 @@ create table storageterm (
 	CONSTRAINT fk_record FOREIGN KEY(recordtype, recordid) REFERENCES record(type, id) 
 );
 
---ALTER TABLE record OWNER TO systemone;
+ALTER TABLE record OWNER TO systemone;
+ALTER TABLE link OWNER TO systemone;
+ALTER TABLE storageterm OWNER TO systemone;
