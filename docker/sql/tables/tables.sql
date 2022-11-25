@@ -12,11 +12,10 @@ create table link (
 	totype character varying(255),
 	toid character varying(255),
 	PRIMARY KEY (fromtype, fromid, totype, toid),
-	CONSTRAINT fk_torecord FOREIGN KEY(totype, toid) REFERENCES record(type, id), 
 	CONSTRAINT fk_fromrecord FOREIGN KEY(fromtype, fromid) REFERENCES record(type, id) 
+--	CONSTRAINT fk_torecord FOREIGN KEY(totype, toid) REFERENCES record(type, id), 
 );
 
---Kontroller att id stämmer (id är id:et för record). Type saknas i javaklassen storageTerm, men behövs i db tabellen för att mappa med FK.
 create table storageterm (
 	id SERIAL,
 	recordtype character varying(255),
