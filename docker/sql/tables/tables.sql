@@ -29,8 +29,3 @@ create table storageterm (
 
 create view recordstorageterm as select r.*, s.storagetermid, s.storagekey, s.value  
 from record r left join storageterm s on r."type" =s.recordtype and r.id =s.recordid ;
-
-ALTER TABLE record OWNER TO systemone;
-ALTER TABLE link OWNER TO systemone;
-ALTER TABLE storageterm OWNER TO systemone;
-ALTER TABLE recordstorageterm OWNER TO systemone;
