@@ -21,7 +21,7 @@ create table storageterm (
 	recordtype character varying(255),
 	recordid character varying(255),
 	storagetermid character varying(255),
-	value character varying(255),
+	value character varying(5000),
 	storagekey character varying(255),
 	PRIMARY KEY (id),
 	CONSTRAINT fk_record FOREIGN KEY(recordtype, recordid) REFERENCES record(type, id) 
