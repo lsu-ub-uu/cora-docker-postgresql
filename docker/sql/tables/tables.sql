@@ -13,7 +13,6 @@ create table link (
 	toid character varying(255),
 	PRIMARY KEY (fromtype, fromid, totype, toid),
 	CONSTRAINT fk_fromrecord FOREIGN KEY(fromtype, fromid) REFERENCES record(type, id) 
---	CONSTRAINT fk_torecord FOREIGN KEY(totype, toid) REFERENCES record(type, id), 
 );
 
 create table storageterm (

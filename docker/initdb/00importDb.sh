@@ -13,3 +13,6 @@ function run_sql () {
 echo ""
 echo "Creating tables"
 run_sql "sql/tables"
+
+echo "Creating functions"
+run_sql "sql/functions"
