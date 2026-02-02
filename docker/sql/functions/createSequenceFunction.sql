@@ -15,6 +15,8 @@ RAISE EXCEPTION 'START WITH (%) must be >= MINVALUE (%)',
 start_with, min_value;
 END IF;
 
+seq_name := lower(seq_name);
+
 EXECUTE format(
 'CREATE SEQUENCE %I MINVALUE %s START WITH %s',
 seq_name,
