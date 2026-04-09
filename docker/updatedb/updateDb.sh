@@ -1,8 +1,9 @@
 #!/bin/bash
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 dbFilesFolder="dbfiles"
-deleteScript="./deleteDataDivider.sql"
-dataDividers="$DATA_DIVIDERS_TO_UPDATE"
-
+deleteScript="$SCRIPT_DIR/deleteDataDivider.sql"
+dataDividers="$DATA_DIVIDERS"
+	
 function start(){
   setPsqlEnvVars
   deleteDataForDataDividers
@@ -25,7 +26,7 @@ function deleteDataForDataDividers(){
 
 function deleteDataDivider(){
   local dataDivider="$1"
-  local logFile="delete_${dataDivider}.log"
+  local logFile="$SCRIPT_DIR/delete_${dataDivider}.log"
 
   echo "Deleting $dataDivider (logging to $logFile)"
 
@@ -63,10 +64,10 @@ function importSqlFileForDataDivider(){
 }
 
 function storeUpdateDbVersion(){
-  local updatedbVersion="$UPDATEDB_VERSION"
+  local updatedbVersion="$applicationVersion"
 
   if [ -z "$updatedbVersion" ]; then
-    echo "UPDATEDB_VERSION is not set, skipping version update in DB"
+    echo "applicationVersion is not set, skipping version update in DB"
     return 0
   fi
 
@@ -82,7 +83,7 @@ function storeUpdateDbVersion(){
       );
 
       insert into cora_meta(key, value, updated_at)
-      values ('updatedb_version', :'updatedbVersion', now())
+      values ('updatedb_version', '$updatedbVersion', now())
       on conflict (key) do update
         set value = excluded.value,
             updated_at = excluded.updated_at;
