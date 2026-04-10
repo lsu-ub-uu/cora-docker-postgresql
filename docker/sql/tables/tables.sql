@@ -1,3 +1,10 @@
+CREATE TABLE cora_meta (
+	key text,
+	value text NOT NULL,
+	updated_at timestamptz NOT NULL default now(),
+	PRIMARY KEY (key)
+);
+
 CREATE TABLE record (
 	type character varying(255),
 	id character varying(255),
