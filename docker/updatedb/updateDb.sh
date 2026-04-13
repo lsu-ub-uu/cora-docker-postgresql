@@ -7,6 +7,7 @@ updatedbVersion="$applicationVersion"
 
 function start(){
   setPsqlEnvVars
+  waitForDb
   ensureMetaTableExists
   shouldRunUpdate || return 0
   deleteDataForDataDividers
@@ -21,6 +22,13 @@ function setPsqlEnvVars(){
   export PGPASSWORD="$POSTGRES_PASSWORD"
 }
 
+function waitForDb() {
+  until pg_isready -h "$PGHOST" -p 5432; do
+    echo "waiting for database"
+    sleep 2
+  done
+}
+
 function ensureMetaTableExists(){
   psql -v ON_ERROR_STOP=1 \
     -c "
@@ -29,7 +37,7 @@ function ensureMetaTableExists(){
         value text not null,
         updated_at timestamptz not null default now()
       );
-    " > "$SCRIPT_DIR/ensure_meta.log" 2>&1
+    " 2>&1 | tee "$SCRIPT_DIR/ensure_meta.log"
 }
 
 function shouldRunUpdate(){
@@ -52,7 +60,7 @@ function shouldRunUpdate(){
 function getCurrentDbVersion(){
   # -t: tuples only, -A: unaligned, so output is just the value
   psql -v ON_ERROR_STOP=1 -tA \
-    -c "select value from cora_meta where key='updatedb_version';" 2>/dev/null | tr -d '\r'
+    -c "select value from cora_meta where key='updatedb_version';" | tr -d '\r'
 }
 
 function deleteDataForDataDividers(){
@@ -67,8 +75,7 @@ function deleteDataDivider(){
   echo "Deleting $dataDivider (logging to $logFile)"
   psql -v ON_ERROR_STOP=1 \
     -v dataDivider="$dataDivider" \
-    -f "$deleteScript" \
-    > "$logFile" 2>&1
+    -f "$deleteScript"  2>&1 | tee "$logFile"
 }
 
 function importDataForDataDividers(){
