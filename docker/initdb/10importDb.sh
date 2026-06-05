@@ -46,7 +46,7 @@ function importSqlFileForDataDivider(){
 
 function shouldStoreVersion(){
   if [ -z "$updatedbVersion" ]; then
-    echo "applicationVersion is not set - refusing to store version"
+    echo "applicationVersion is not set - skip store version"
     return 1
   fi
 
