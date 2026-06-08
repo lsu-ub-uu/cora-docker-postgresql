@@ -1,0 +1,5 @@
+SELECT 'CREATE DATABASE fcrepo'
+WHERE NOT EXISTS (
+  SELECT FROM pg_database WHERE datname = 'fcrepo'
+)\gexec
+GRANT ALL PRIVILEGES ON DATABASE fcrepo TO :"POSTGRES_USER";

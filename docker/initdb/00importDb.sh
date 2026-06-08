@@ -6,7 +6,10 @@ function run_sql () {
    for SQL in "$1"/*
 	do
  	 echo "Run file: $SQL"
-		psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER $POSTGRES_DB < $SQL > $SQL.log
+		psql -v ON_ERROR_STOP=1 \
+		-v POSTGRES_USER="$POSTGRES_USER" \
+		-U $POSTGRES_USER \
+		$POSTGRES_DB < $SQL > $SQL.log
 	done
 }
 
@@ -16,3 +19,6 @@ run_sql "sql/tables"
 
 echo "Creating functions"
 run_sql "sql/functions"
+
+echo "Creating database for Fedora Commons"
+run_sql "sql/fedoraCommons"
