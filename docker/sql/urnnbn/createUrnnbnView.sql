@@ -21,11 +21,11 @@ CREATE MATERIALIZED VIEW urnnbn_recent_records as
 		AND record_recordInfo->>'name' = 'recordInfo'
 		AND record_id->>'name' = 'id'
 		AND record_urnnbn->>'name' = 'urn'
+		AND record_urnnbn->>'value' LIKE 'urn:nbn:se:diva%'
 		AND record_visibility->>'name' = 'visibility' -- Maybe we do not need this line
 		AND record_visibility->>'value' = 'published'
 		AND record_tsCreated->>'name' = 'tsCreated'
-	ORDER BY ts_created DESC
-	LIMIT 10000;
+	ORDER BY ts_created desc;
 
 --Need it in order to use concurrently while refreshing the view
 CREATE UNIQUE INDEX idx_urnnbn_recent_records_id ON urnnbn_recent_records (id);
