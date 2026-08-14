@@ -21,7 +21,7 @@ CREATE MATERIALIZED VIEW urnnbn_recent_records as
 		AND record_recordInfo->>'name' = 'recordInfo'
 		AND record_id->>'name' = 'id'
 		AND record_urnnbn->>'name' = 'urn'
-		AND record_urnnbn->>'value' LIKE 'urn:nbn:se:diva%'
+--		AND record_urnnbn->>'value' LIKE 'urn:nbn:se:diva%'
 		AND record_visibility->>'name' = 'visibility' -- Maybe we do not need this line
 		AND record_visibility->>'value' = 'published'
 		AND record_tsCreated->>'name' = 'tsCreated'
