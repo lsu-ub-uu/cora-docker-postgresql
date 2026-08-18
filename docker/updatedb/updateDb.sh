@@ -3,7 +3,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 dbFilesFolder="dbfiles"
 deleteScript="$SCRIPT_DIR/deleteDataDivider.sql"
 dataDividers="$DATA_DIVIDERS"
-updatedbVersion="$applicationVersion"
+updatedbVersion="$helmChartVersion"
 
 function start(){
   setPsqlEnvVars
@@ -42,7 +42,7 @@ function ensureMetaTableExists(){
 
 function shouldRunUpdate(){
   if [ -z "$updatedbVersion" ]; then
-    echo "applicationVersion is not set - refusing to run update"
+    echo "helmChartVersion is not set - refusing to run update"
     return 1
   fi
 
