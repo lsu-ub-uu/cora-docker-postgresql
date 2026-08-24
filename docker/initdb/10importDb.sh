@@ -2,7 +2,7 @@
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 dbFilesFolder="dbfiles"
 dataDividers="$DATA_DIVIDERS"
-updatedbVersion="$applicationVersion"
+updatedbVersion="$helmChartVersion"
 
 function start(){
   setPsqlEnvVars
@@ -46,7 +46,7 @@ function importSqlFileForDataDivider(){
 
 function shouldStoreVersion(){
   if [ -z "$updatedbVersion" ]; then
-    echo "applicationVersion is not set - skip store version"
+    echo "helmChartVersion is not set - skip store version"
     return 1
   fi
 
