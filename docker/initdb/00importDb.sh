@@ -24,4 +24,4 @@ echo "Creating database for Fedora Commons"
 run_sql "sql/fedoraCommons"
 
 echo "Run possible scripts for extending common database."
-run_sql "sql/extra
+run_sql "sql/extra"
