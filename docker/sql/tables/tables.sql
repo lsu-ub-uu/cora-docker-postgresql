@@ -35,3 +35,10 @@ create table storageterm (
 
 create view recordstorageterm as select r.*, s.storagetermid, s.storagekey, s.value  
 from record r left join storageterm s on r."type" =s.recordtype and r.id =s.recordid ;
+
+CREATE TABLE recordlock (
+    type varchar(255) NOT NULL,
+    id varchar(255) NOT NULL,
+    locktime timestamptz NOT NULL DEFAULT now(),
+    PRIMARY KEY (type, id)
+);
