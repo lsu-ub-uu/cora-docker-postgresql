@@ -7,11 +7,16 @@ function run_sql () {
 	do
  	 echo "Run file: $SQL"
 		psql -v ON_ERROR_STOP=1 \
+		-v POSTGRES_DB="$POSTGRES_DB" \
 		-v POSTGRES_USER="$POSTGRES_USER" \
 		-U $POSTGRES_USER \
 		$POSTGRES_DB < $SQL > $SQL.log
 	done
 }
+
+echo ""
+echo "Applying database configuration"
+run_sql "sql/database"
 
 echo ""
 echo "Creating tables"
